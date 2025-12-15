@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_register.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_chat.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_chat.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/navigation_nav_graph.xml.flat",
+        "source": "com.barbershop.app-main-58:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_ai_features.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_ai_features.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/xml_backup_rules.xml.flat",
+        "source": "com.barbershop.app-main-58:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_booking.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_booking.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_item_service.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/item_service.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/xml_data_extraction_rules.xml.flat",
+        "source": "com.barbershop.app-main-58:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_barber_profile.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_barber_profile.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_admin.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_admin.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_activity_main.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_item_barber.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/item_barber.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_login.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.barbershop.app-merged_res-56:/layout_fragment_home.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_home.xml"
+    }
+]

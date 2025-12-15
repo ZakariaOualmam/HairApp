@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.HairApp" parent="Theme.Material3.Light.NoActionBar">
+        <!-- TrimSpot Crimson Theme -->
+        <item name="colorPrimary">@color/crimson_primary</item>
+        <item name="colorPrimaryVariant">@color/crimson_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/charcoal</item>
+        <item name="colorSecondaryVariant">@color/charcoal_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        <item name="android:statusBarColor">@color/crimson_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background_soft</item>
+    </style>
+    
+    <style name="Theme.HairApp" parent="Base.Theme.HairApp" />
+</resources>

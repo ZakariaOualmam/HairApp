@@ -1,0 +1,146 @@
+[
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_home.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_bg_bottom_sheet.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\bg_bottom_sheet.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_admin_dashboard.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_admin_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_admin.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_login.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_calendar.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_calendar.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_user_profile.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_user_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_ai.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_ai.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_barber_profile.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_barber_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_item_service.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\item_service.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_bg_crimson_button.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\bg_crimson_button.xml"
+    },
+    {
+        "merged": "com.barbershop.app-debug-56:/layout_fragment_user_profile.xml.flat",
+        "source": "com.barbershop.app-main-58:/layout/fragment_user_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_item_ai_feature.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\item_ai_feature.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_register.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_home_simple.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_home_simple.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\menu_top_bar_menu.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\menu\\top_bar_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_bg_drag_handle.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\bg_drag_handle.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_item_barber.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\item_barber.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_divider_horizontal.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\divider_horizontal.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_booking.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_booking.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_booking_list.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_booking_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_map_pin_crimson.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_map_pin_crimson.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_item_booking.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\item_booking.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_barber_dashboard.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_barber_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_ai_features.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_ai_features.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\color_selector_nav_item.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\color\\selector_nav_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\layout_fragment_chat.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\layout\\fragment_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_ic_filter.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\ic_filter.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_bg_search_bar.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\bg_search_bar.xml"
+    },
+    {
+        "merged": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-debug-56:\\drawable_bg_loyalty_card_gradient.xml.flat",
+        "source": "C:\\Users\\diibwolf\\.gradle\\daemon\\8.13\\com.barbershop.app-main-58:\\drawable\\bg_loyalty_card_gradient.xml"
+    }
+]

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Dashboard"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <Button android:text="Manage Users &amp; Barbers" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <Button android:text="Approve New Barbershops" android:layout_width="match_parent" android:layout_height="wrap_content" android:backgroundTint="#4CAF50"/>
+        <Button android:text="Manage Payments &amp; Commissions" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <Button android:text="Generate Discount Coupons" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <Button android:text="View System Statistics" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>

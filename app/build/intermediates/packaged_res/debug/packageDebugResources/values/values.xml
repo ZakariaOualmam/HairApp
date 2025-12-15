@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_soft">#F5F5F5</color>
+    <color name="bg_dark">#121212</color>
+    <color name="charcoal">#212121</color>
+    <color name="charcoal_light">#424242</color>
+    <color name="crimson_dark">#B71C1C</color>
+    <color name="crimson_light">#EF5350</color>
+    <color name="crimson_primary">#D32F2F</color>
+    <color name="error_red">#B00020</color>
+    <color name="gray_light">#BDBDBD</color>
+    <color name="gray_medium">#757575</color>
+    <color name="purple_500">#D32F2F</color>
+    <color name="purple_700">#B71C1C</color>
+    <color name="scrim_dark">#80000000</color>
+    <color name="scrim_light">#40000000</color>
+    <color name="success_teal">#009688</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="teal_200">#EF5350</color>
+    <color name="teal_700">#D32F2F</color>
+    <color name="text_on_crimson">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="white">#FFFFFF</color>
+    <string name="app_name">Barbershop App</string>
+    <style name="Base.Theme.HairApp" parent="Theme.Material3.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/crimson_primary</item>
+        <item name="colorPrimaryVariant">@color/crimson_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/charcoal</item>
+        <item name="colorSecondaryVariant">@color/charcoal_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        <item name="android:statusBarColor">@color/crimson_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background_soft</item>
+    </style>
+    <style name="Theme.HairApp" parent="Base.Theme.HairApp"/>
+</resources>
