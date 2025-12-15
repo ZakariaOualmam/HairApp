@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+
     <!-- Global action to navigate to profile from anywhere -->
     <action
         android:id="@+id/action_global_userProfileFragment"
@@ -14,6 +15,11 @@
     <action
         android:id="@+id/action_global_editProfileFragment"
         app:destination="@id/editProfileFragment" />
+
+    <!-- Global action to navigate to home from anywhere -->
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment" />
 
     <fragment
         android:id="@+id/loginFragment"
