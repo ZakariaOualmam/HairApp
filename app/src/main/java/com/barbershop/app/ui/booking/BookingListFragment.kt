@@ -7,6 +7,7 @@ import com.barbershop.app.R
 import dagger.hilt.android.AndroidEntryPoint
 
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -22,17 +23,24 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentBookingListBinding.bind(view)
 
+        // Initial state
+        updateTabs(binding)
+
         // Tab click handling
         binding.tabUpcoming.setOnClickListener {
-            showingUpcoming = true
-            updateTabs(binding)
-            binding.rvBookings.adapter?.notifyDataSetChanged()
+            if (!showingUpcoming) {
+                showingUpcoming = true
+                updateTabs(binding)
+                binding.rvBookings.adapter?.notifyDataSetChanged()
+            }
         }
 
         binding.tabHistory.setOnClickListener {
-            showingUpcoming = false
-            updateTabs(binding)
-            binding.rvBookings.adapter?.notifyDataSetChanged()
+            if (showingUpcoming) {
+                showingUpcoming = false
+                updateTabs(binding)
+                binding.rvBookings.adapter?.notifyDataSetChanged()
+            }
         }
 
         // Mock Adapter
@@ -68,16 +76,19 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
     }
 
     private fun updateTabs(binding: FragmentBookingListBinding) {
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        val secondaryColor = ContextCompat.getColor(requireContext(), R.color.text_secondary)
+        
         if (showingUpcoming) {
-            binding.tabUpcoming.setTextColor(resources.getColor(R.color.primary, null))
-            binding.tabUpcoming.setBackgroundResource(R.drawable.bg_tab_indicator_active)
-            binding.tabHistory.setTextColor(resources.getColor(R.color.text_secondary, null))
-            binding.tabHistory.background = null
+            binding.tvTabUpcoming.setTextColor(primaryColor)
+            binding.indicatorUpcoming.setBackgroundColor(primaryColor)
+            binding.tvTabHistory.setTextColor(secondaryColor)
+            binding.indicatorHistory.setBackgroundColor(android.graphics.Color.TRANSPARENT)
         } else {
-            binding.tabHistory.setTextColor(resources.getColor(R.color.primary, null))
-            binding.tabHistory.setBackgroundResource(R.drawable.bg_tab_indicator_active)
-            binding.tabUpcoming.setTextColor(resources.getColor(R.color.text_secondary, null))
-            binding.tabUpcoming.background = null
+            binding.tvTabHistory.setTextColor(primaryColor)
+            binding.indicatorHistory.setBackgroundColor(primaryColor)
+            binding.tvTabUpcoming.setTextColor(secondaryColor)
+            binding.indicatorUpcoming.setBackgroundColor(android.graphics.Color.TRANSPARENT)
         }
     }
 }

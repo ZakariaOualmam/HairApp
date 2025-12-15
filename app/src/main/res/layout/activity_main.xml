@@ -22,8 +22,7 @@
             android:background="@android:color/transparent"
             app:title=""
             app:titleTextColor="@color/text_primary"
-            app:navigationIconTint="@color/text_primary"
-            app:menu="@menu/top_bar_menu">
+            app:navigationIconTint="@color/text_primary">
 
             <!-- Custom Title -->
             <TextView
@@ -35,6 +34,32 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
                 android:fontFamily="sans-serif-medium" />
+
+            <!-- Profile Image Button on Right -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/primary"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/ivProfileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_profile"
+                    android:scaleType="centerCrop"
+                    android:background="@color/primary_container"
+                    android:padding="6dp"
+                    app:tint="@color/primary" />
+
+            </com.google.android.material.card.MaterialCardView>
 
         </com.google.android.material.appbar.MaterialToolbar>
 
