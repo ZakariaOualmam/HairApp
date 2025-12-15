@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="8dp"
                 app:cardCornerRadius="25dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/surface"
@@ -80,6 +80,21 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <!-- Suggestions RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSuggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:visibility="gone"
+                android:overScrollMode="never"
+                android:background="@color/surface"
+                android:elevation="2dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <!-- Map Section -->
             <com.google.android.material.card.MaterialCardView

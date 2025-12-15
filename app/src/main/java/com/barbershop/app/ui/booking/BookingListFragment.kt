@@ -23,6 +23,11 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentBookingListBinding.bind(view)
 
+        // Return button to Home
+        binding.btnReturnHome.setOnClickListener {
+            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+        }
+
         // Initial state
         updateTabs(binding)
 

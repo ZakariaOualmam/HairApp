@@ -23,12 +23,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var barberAdapter: BarberAdapter
+    private lateinit var suggestionAdapter: BarberSuggestionAdapter
+    private var allBarbers: List<com.barbershop.app.domain.model.Barber> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
         setupRecyclerView()
+        setupSuggestionRecyclerView()
         setupClickListeners()
         setupMapSection()
         observeBarbers()
@@ -43,11 +46,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(R.id.action_homeFragment_to_barberProfileFragment, bundle)
             }
         )
-        
         binding.rvBarbers.apply {
             adapter = barberAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    private fun setupSuggestionRecyclerView() {
+        suggestionAdapter = BarberSuggestionAdapter { barber ->
+            // On suggestion click, go to barber profile
+            val bundle = Bundle().apply {
+                putParcelable("barber", barber)
+            }
+            binding.rvSuggestions.visibility = View.GONE
+            binding.etSearch.setText("")
+            findNavController().navigate(R.id.action_homeFragment_to_barberProfileFragment, bundle)
+        }
+        binding.rvSuggestions.adapter = suggestionAdapter
+        binding.rvSuggestions.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun setupClickListeners() {
@@ -55,15 +71,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.ivFilter.setOnClickListener {
             Toast.makeText(context, "Filter options coming soon", Toast.LENGTH_SHORT).show()
         }
-        
-        // Search functionality
-        binding.etSearch.setOnEditorActionListener { textView, _, _ ->
-            val query = textView.text.toString()
-            if (query.isNotEmpty()) {
-                Toast.makeText(context, "Searching for: $query", Toast.LENGTH_SHORT).show()
+
+        // Search functionality: show suggestions as user types
+        binding.etSearch.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val query = s?.toString()?.trim() ?: ""
+                if (query.isNotEmpty()) {
+                    val filtered = allBarbers.filter { it.name.contains(query, ignoreCase = true) }
+                    if (filtered.isNotEmpty()) {
+                        suggestionAdapter.submitList(filtered)
+                        binding.rvSuggestions.visibility = View.VISIBLE
+                    } else {
+                        binding.rvSuggestions.visibility = View.GONE
+                    }
+                } else {
+                    binding.rvSuggestions.visibility = View.GONE
+                }
             }
-            true
-        }
+            override fun afterTextChanged(s: android.text.Editable?) {}
+        })
     }
 
     private fun setupMapSection() {
@@ -71,7 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.mapCard.setOnClickListener {
             openGoogleMapsWithBarbers()
         }
-        
+
         // Open Map button
         binding.btnOpenMap.setOnClickListener {
             openGoogleMapsWithBarbers()
@@ -82,12 +109,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // Default location (can be replaced with user's current location)
         val centerLat = 40.7128
         val centerLng = -74.0060
-        
+
         // Open Google Maps centered on the area with barbers
         val uri = Uri.parse("geo:$centerLat,$centerLng?q=barbershop")
         val mapIntent = Intent(Intent.ACTION_VIEW, uri)
         mapIntent.setPackage("com.google.android.apps.maps")
-        
+
         if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(mapIntent)
         } else {
@@ -106,6 +133,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     }
                     is Resource.Success -> {
                         val barbers = state.data ?: emptyList()
+                        allBarbers = barbers
                         barberAdapter.submitList(barbers)
                         // Update map barber count
                         binding.tvMapBarberCount.text = "${barbers.size} barbers nearby"

@@ -12,7 +12,12 @@ class AIFeaturesFragment : Fragment(R.layout.fragment_ai_features) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
+        // Return button to Home
+        view.findViewById<View>(R.id.btnReturnHome)?.setOnClickListener {
+            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+        }
+
         // Setup click listeners for AI feature cards
         view.findViewById<View>(R.id.cardSimulator)?.setOnClickListener {
             Toast.makeText(context, "Opening Haircut Simulator...", Toast.LENGTH_SHORT).show()
