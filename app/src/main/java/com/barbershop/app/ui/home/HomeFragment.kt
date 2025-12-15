@@ -51,23 +51,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             Toast.makeText(context, "Filter options coming soon", Toast.LENGTH_SHORT).show()
         }
         
-        // Filter chips
-        binding.chipNearMe.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(context, "Showing nearby barbers", Toast.LENGTH_SHORT).show()
+        // Search functionality
+        binding.etSearch.setOnEditorActionListener { textView, _, _ ->
+            val query = textView.text.toString()
+            if (query.isNotEmpty()) {
+                Toast.makeText(context, "Searching for: $query", Toast.LENGTH_SHORT).show()
             }
-        }
-        
-        binding.chipRating.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(context, "Filtering by rating 4.5+", Toast.LENGTH_SHORT).show()
-            }
-        }
-        
-        binding.chipOpenNow.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(context, "Showing open barbershops", Toast.LENGTH_SHORT).show()
-            }
+            true
         }
     }
 
