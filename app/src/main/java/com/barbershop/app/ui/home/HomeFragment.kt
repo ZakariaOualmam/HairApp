@@ -32,12 +32,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupRecyclerView() {
-        barberAdapter = BarberAdapter { barber ->
-            val bundle = Bundle().apply {
-                putParcelable("barber", barber)
+        barberAdapter = BarberAdapter(
+            onItemClick = { barber ->
+                val bundle = Bundle().apply {
+                    putParcelable("barber", barber)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_barberProfileFragment, bundle)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_barberProfileFragment, bundle)
-        }
+        )
         
         binding.rvBarbers.apply {
             adapter = barberAdapter

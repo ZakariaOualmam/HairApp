@@ -39,7 +39,8 @@ class BarberAdapter(
         val barber = differ.currentList[position]
         holder.binding.apply {
             tvBarberName.text = barber.name
-            tvBarberAddress.text = "${barber.address} • ${String.format("%.1f", barber.distance ?: 0.0)} mi"
+            val distance = barber.distance
+            tvBarberAddress.text = if (distance != null) "${barber.address} • ${String.format("%.1f", distance)} mi" else barber.address
             tvRating.text = "${barber.rating}"
             tvSpecialty.text = barber.specialties?.joinToString(" • ") ?: "Haircut • Styling"
             
