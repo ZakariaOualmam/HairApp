@@ -29,7 +29,7 @@
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_back"
                     android:contentDescription="Return to Home"
-                    android:tint="@color/primary"
+                    android:tint="@color/purple_500"
                     android:padding="8dp"
                     android:layout_marginEnd="8dp" />
                 <TextView

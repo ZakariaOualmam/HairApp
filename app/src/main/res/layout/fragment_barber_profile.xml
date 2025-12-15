@@ -24,11 +24,34 @@
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:layout_collapseMode="pin">
+                <ImageButton
+                    android:id="@+id/btnReturnHome"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="Return to Home"
+                    android:tint="@color/purple_500"
+                    android:padding="8dp"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/tvBarberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barber Details"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
