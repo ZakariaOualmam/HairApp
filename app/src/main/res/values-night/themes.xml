@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.HairApp" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Modern Indigo Theme -->
+    <!-- Base application theme (Dark Mode). -->
+    <style name="Base.Theme.HairApp" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Modern Indigo Theme (Dark) -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/text_on_primary</item>
@@ -9,11 +9,11 @@
         
         <item name="colorSecondary">@color/charcoal</item>
         <item name="colorSecondaryVariant">@color/charcoal_light</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
         
         <item name="android:statusBarColor">@color/background_soft</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/surface</item>
         
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/text_primary</item>
@@ -31,7 +31,7 @@
     <!-- Custom Card Style with Shadows -->
     <style name="Widget.HairApp.CardView" parent="Widget.Material3.CardView.Elevated">
         <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">2dp</item>
+        <item name="cardElevation">4dp</item>
         <item name="cardBackgroundColor">@color/background_card</item>
         <item name="strokeWidth">0dp</item>
     </style>
@@ -46,7 +46,7 @@
     
     <style name="Widget.HairApp.Chip.Selected" parent="Widget.HairApp.Chip">
         <item name="chipBackgroundColor">@color/primary_container</item>
-        <item name="android:textColor">@color/primary_dark</item>
+        <item name="android:textColor">@color/primary_light</item>
     </style>
     
     <!-- Bottom Navigation Style -->

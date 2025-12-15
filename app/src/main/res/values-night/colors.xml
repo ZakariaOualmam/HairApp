@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modern Purple/Indigo Primary Colors (Dark Mode) -->
+    <color name="primary">#818CF8</color>
+    <color name="primary_dark">#6366F1</color>
+    <color name="primary_light">#A5B4FC</color>
+    <color name="primary_container">#312E81</color>
+    
+    <!-- Legacy Crimson Colors (keeping for compatibility) -->
+    <color name="crimson_primary">#818CF8</color>
+    <color name="crimson_dark">#6366F1</color>
+    <color name="crimson_light">#A5B4FC</color>
+    
+    <!-- Material Design Compatibility -->
+    <color name="purple_500">#818CF8</color>
+    <color name="purple_700">#6366F1</color>
+    <color name="teal_200">#5EEAD4</color>
+    <color name="teal_700">#2DD4BF</color>
+    
+    <!-- Accent Colors for AI Studio Cards -->
+    <color name="accent_teal">#2DD4BF</color>
+    <color name="accent_teal_light">#134E4A</color>
+    <color name="accent_orange">#FB923C</color>
+    <color name="accent_orange_light">#7C2D12</color>
+    <color name="accent_purple">#A78BFA</color>
+    <color name="accent_purple_light">#4C1D95</color>
+    
+    <!-- Charcoal & Neutrals -->
+    <color name="charcoal">#F9FAFB</color>
+    <color name="charcoal_light">#E5E7EB</color>
+    <color name="gray_medium">#9CA3AF</color>
+    <color name="gray_light">#4B5563</color>
+    <color name="gray_extra_light">#374151</color>
+    
+    <!-- Backgrounds (Dark Mode) -->
+    <color name="background_soft">#0F172A</color>
+    <color name="background_card">#1E293B</color>
+    <color name="white">#1E293B</color>
+    <color name="surface">#1E293B</color>
+    <color name="surface_variant">#334155</color>
+    
+    <!-- Backgrounds (Dark Mode specific) -->
+    <color name="bg_dark">#0F172A</color>
+    <color name="surface_dark">#1E293B</color>
+    <color name="surface_dark_elevated">#334155</color>
+    
+    <!-- Text Colors (Dark Mode) -->
+    <color name="text_primary">#F9FAFB</color>
+    <color name="text_secondary">#9CA3AF</color>
+    <color name="text_hint">#6B7280</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_crimson">#FFFFFF</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#34D399</color>
+    <color name="success_light">#064E3B</color>
+    <color name="success_teal">#34D399</color>
+    <color name="error">#F87171</color>
+    <color name="error_light">#7F1D1D</color>
+    <color name="error_red">#F87171</color>
+    <color name="warning">#FBBF24</color>
+    <color name="warning_light">#78350F</color>
+    <color name="warning_orange">#FBBF24</color>
+    <color name="info">#60A5FA</color>
+    <color name="info_light">#1E3A8A</color>
+    
+    <!-- Booking Status Colors -->
+    <color name="status_confirmed">#34D399</color>
+    <color name="status_confirmed_bg">#064E3B</color>
+    <color name="status_completed">#9CA3AF</color>
+    <color name="status_completed_bg">#374151</color>
+    <color name="status_pending">#FBBF24</color>
+    <color name="status_pending_bg">#78350F</color>
+    <color name="status_cancelled">#F87171</color>
+    <color name="status_cancelled_bg">#7F1D1D</color>
+    
+    <!-- Rating Star -->
+    <color name="star_gold">#FBBF24</color>
+    
+    <!-- Transparent Overlays -->
+    <color name="scrim_dark">#CC000000</color>
+    <color name="scrim_light">#66000000</color>
+    
+    <!-- Shadow Colors -->
+    <color name="shadow">#40000000</color>
+    <color name="shadow_light">#20000000</color>
+    
+    <!-- Divider -->
+    <color name="divider">#374151</color>
+    
+    <!-- Bottom Navigation -->
+    <color name="nav_unselected">#6B7280</color>
+</resources>

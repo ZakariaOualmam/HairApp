@@ -1,119 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_soft"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- Search Bar Container -->
-    <LinearLayout
-        android:id="@+id/searchContainer"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/white"
-        android:elevation="4dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- Search Bar -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search_bar"
-            android:paddingHorizontal="16dp">
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:background="@android:color/transparent"
-                android:hint="Find a barber or service..."
-                android:paddingEnd="48dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/ivFilter"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_filter"
-                android:layout_marginEnd="12dp"
-                app:layout_constraintEnd_toEndOf="@id/etSearch"
-                app:layout_constraintTop_toTopOf="@id/etSearch"
-                app:layout_constraintBottom_toBottomOf="@id/etSearch"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Filter Chips -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+            <!-- Header Title -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleSelection="false">
+                android:text="Home"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipNearMe"
-                    android:layout_width="wrap_content"
+            <!-- Search Bar Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_search"
+                        android:layout_marginEnd="12dp" />
+
+                    <EditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="Find a barber or service"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_primary"
+                        android:inputType="text"
+                        android:maxLines="1" />
+
+                    <ImageView
+                        android:id="@+id/ivFilter"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_filter"
+                        android:layout_marginStart="8dp"
+                        app:tint="@color/text_secondary" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Barber List in Card Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeWidth="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBarbers"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Near Me"
-                    android:checked="true"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                    android:nestedScrollingEnabled="false"
+                    android:clipToPadding="false"
+                    android:paddingVertical="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_barber" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rating 4.5+"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+            </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipOpenNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Open Now"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+        </LinearLayout>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBeard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Beard Trim"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+    </androidx.core.widget.NestedScrollView>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipHaircut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Haircut"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-    </LinearLayout>
-
-    <!-- Barber List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBarbers"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_barber" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
