@@ -1,9 +1,13 @@
+
+
+
 package com.barbershop.app.ui.ai
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.barbershop.app.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +19,7 @@ class AIFeaturesFragment : Fragment(R.layout.fragment_ai_features) {
 
         // Return button to Home
         view.findViewById<View>(R.id.btnReturnHome)?.setOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+            findNavController().navigate(R.id.action_global_homeFragment)
         }
 
         // Setup click listeners for AI feature cards

@@ -1,8 +1,17 @@
 package com.barbershop.app.ui.booking
 
+
+
+
+
+
+
+
+
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.barbershop.app.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +34,7 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
 
         // Return button to Home
         binding.btnReturnHome.setOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
+            findNavController().navigate(R.id.action_global_homeFragment)
         }
 
         // Initial state
