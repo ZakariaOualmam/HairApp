@@ -63,8 +63,8 @@ class BarberAdapter(
                 } else {
                     // Default: Open in Google Maps
                     val context = root.context
-                    val latitude = barber.latitude ?: 0.0
-                    val longitude = barber.longitude ?: 0.0
+                    val latitude = barber.latitude
+                    val longitude = barber.longitude
                     val uri = if (latitude != 0.0 && longitude != 0.0) {
                         Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude(${barber.name})")
                     } else {
