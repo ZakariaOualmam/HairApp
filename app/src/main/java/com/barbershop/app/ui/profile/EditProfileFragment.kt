@@ -1,8 +1,14 @@
 package com.barbershop.app.ui.profile
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.barbershop.app.R
@@ -14,12 +20,28 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
 
+    private var selectedImageUri: Uri? = null
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val uri = data?.data
+            if (uri != null) {
+                selectedImageUri = uri
+                binding.ivAvatar.setImageURI(uri)
+            } else {
+                Toast.makeText(context, "Failed to get image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
 
         loadUserData()
         setupClickListeners()
+        setupToolbarBackButton()
     }
 
     private fun loadUserData() {
@@ -33,11 +55,18 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
     private fun setupClickListeners() {
         binding.btnChangePhoto.setOnClickListener {
-            Toast.makeText(context, "Photo picker coming soon", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            pickImageLauncher.launch(intent)
         }
 
         binding.btnSaveChanges.setOnClickListener {
             saveChanges()
+        }
+    }
+
+    private fun setupToolbarBackButton() {
+        requireActivity().findViewById<androidx.appcompat.widget.Toolbar?>(R.id.toolbar)?.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
