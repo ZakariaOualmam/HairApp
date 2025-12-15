@@ -48,30 +48,30 @@
     <path
         android:fillColor="#6366F1"
         android:pathData="M100,70 C100,55 88,45 88,35 C88,25 95,18 100,18 C105,18 112,25 112,35 C112,45 100,55 100,70z"/>
-    <circle
+    <path
         android:fillColor="#FFFFFF"
-        android:cx="100"
-        android:cy="35"
-        android:r="6"/>
+        android:pathData="M106,35
+            A6,6 0 1,1 94,35
+            A6,6 0 1,1 106,35"/>
     
     <!-- Map pin 2 -->
     <path
         android:fillColor="#6366F1"
         android:pathData="M300,90 C300,75 288,65 288,55 C288,45 295,38 300,38 C305,38 312,45 312,55 C312,65 300,75 300,90z"/>
-    <circle
+    <path
         android:fillColor="#FFFFFF"
-        android:cx="300"
-        android:cy="55"
-        android:r="6"/>
+        android:pathData="M306,55
+            A6,6 0 1,1 294,55
+            A6,6 0 1,1 306,55"/>
     
     <!-- Map pin 3 -->
     <path
         android:fillColor="#6366F1"
         android:pathData="M180,140 C180,125 168,115 168,105 C168,95 175,88 180,88 C185,88 192,95 192,105 C192,115 180,125 180,140z"/>
-    <circle
+    <path
         android:fillColor="#FFFFFF"
-        android:cx="180"
-        android:cy="105"
-        android:r="6"/>
+        android:pathData="M186,105
+            A6,6 0 1,1 174,105
+            A6,6 0 1,1 186,105"/>
         
 </vector>
