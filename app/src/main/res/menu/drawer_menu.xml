@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_city"
+        android:icon="@drawable/ic_location"
+        android:title="City" />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/ic_history"
+        android:title="Request history" />
+    <item
+        android:id="@+id/nav_intercity"
+        android:icon="@drawable/ic_intercity"
+        android:title="Intercity" />
+    <item
+        android:id="@+id/nav_freight"
+        android:icon="@drawable/ic_freight"
+        android:title="Freight" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+    <item
+        android:id="@+id/nav_support"
+        android:icon="@drawable/ic_support"
+        android:title="Support" />
+    <item
+        android:id="@+id/nav_help"
+        android:icon="@drawable/ic_help"
+        android:title="Help" />
+</menu>
