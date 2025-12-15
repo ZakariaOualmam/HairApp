@@ -15,5 +15,7 @@ data class Barber(
     val services: List<Service> = emptyList(),
     val latitude: Double,
     val longitude: Double,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val distance: Double? = null,
+    val specialties: List<String>? = null
 ) : Parcelable

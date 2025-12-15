@@ -22,7 +22,8 @@
             android:background="@android:color/transparent"
             app:title=""
             app:titleTextColor="@color/text_primary"
-            app:navigationIconTint="@color/text_primary">
+            app:navigationIconTint="@color/text_primary"
+            app:menu="@menu/top_bar_menu">
 
             <!-- Custom Title -->
             <TextView

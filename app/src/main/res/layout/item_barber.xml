@@ -1,139 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="12dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/surface"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Circular Profile Image -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
-
-            <ImageView
-                android:id="@+id/ivBarberImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_profile" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Barber Info -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="14dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <!-- Name -->
-            <TextView
-                android:id="@+id/tvBarberName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alex Chen"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:fontFamily="sans-serif-medium" />
-
-            <!-- Rating Row -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
+            <!-- Circular Profile Image -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
 
                 <ImageView
-                    android:id="@+id/ivStar"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star_filled" />
+                    android:id="@+id/ivBarberImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_profile" />
 
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Barber Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <!-- Name -->
                 <TextView
-                    android:id="@+id/tvRating"
+                    android:id="@+id/tvBarberName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.9"
-                    android:textSize="13sp"
+                    android:text="Alex Chen"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:layout_marginStart="4dp" />
+                    android:fontFamily="sans-serif-medium" />
 
-                <TextView
-                    android:id="@+id/tvReviewCount"
+                <!-- Rating Row -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(120 reviews)"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginStart="4dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="4dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/ivStar"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_star_filled" />
 
-            <!-- Distance Row -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
+                    <TextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.9"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginStart="4dp" />
 
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_location"
-                    app:tint="@color/primary" />
+                    <TextView
+                        android:id="@+id/tvReviewCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(120 reviews)"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginStart="4dp" />
 
+                </LinearLayout>
+
+                <!-- Specialty -->
                 <TextView
-                    android:id="@+id/tvBarberAddress"
+                    android:id="@+id/tvSpecialty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.5 mi"
-                    android:textSize="13sp"
-                    android:textColor="@color/primary"
-                    android:layout_marginStart="4dp" />
+                    android:text="Haircut • Beard Trim"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_hint"
+                    android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Book Now Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBookNow"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Book Now"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:paddingHorizontal="16dp"
-            app:cornerRadius="18dp"
-            app:backgroundTint="@color/primary"
-            android:textColor="@color/text_on_primary" />
+        <!-- Location Row with Map Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp"
+            android:paddingTop="12dp"
+            android:background="@drawable/border_top_divider">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_location"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvBarberAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="123 Main St, Downtown • 0.5 mi"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginStart="8dp" />
+
+            <!-- Map Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewMap"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Map"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                app:icon="@drawable/ic_location"
+                app:iconTint="@color/primary"
+                app:iconSize="14dp"
+                app:iconPadding="4dp"
+                app:cornerRadius="16dp"
+                app:rippleColor="@color/primary_container" />
+
+            <!-- Book Now Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBookNow"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="Book"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:paddingHorizontal="16dp"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/primary"
+                android:textColor="@color/text_on_primary"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Divider (shown between items) -->
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="70dp" />
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

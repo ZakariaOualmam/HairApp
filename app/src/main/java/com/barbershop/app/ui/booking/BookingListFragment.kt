@@ -16,9 +16,24 @@ import com.barbershop.app.databinding.FragmentBookingListBinding
 @AndroidEntryPoint
 class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
 
+    private var showingUpcoming = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentBookingListBinding.bind(view)
+
+        // Tab click handling
+        binding.tabUpcoming.setOnClickListener {
+            showingUpcoming = true
+            updateTabs(binding)
+            binding.rvBookings.adapter?.notifyDataSetChanged()
+        }
+
+        binding.tabHistory.setOnClickListener {
+            showingUpcoming = false
+            updateTabs(binding)
+            binding.rvBookings.adapter?.notifyDataSetChanged()
+        }
 
         // Mock Adapter
         binding.rvBookings.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -28,22 +43,41 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
             }
 
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                // Determine mock data based on position
                 val statusView = holder.itemView.findViewById<TextView>(R.id.tvStatus)
-                val status = if (position == 0) "Confirmed" else "Pending"
-                statusView.text = status
-                statusView.setTextColor(if (position == 0) android.graphics.Color.parseColor("#4CAF50") else android.graphics.Color.parseColor("#FF9800"))
-                statusView.setBackgroundColor(if (position == 0) android.graphics.Color.parseColor("#E8F5E9") else android.graphics.Color.parseColor("#FFF3E0"))
                 
-                holder.itemView.findViewById<View>(R.id.btnReschedule).setOnClickListener {
-                    Toast.makeText(holder.itemView.context, "Reschedule Clicked", Toast.LENGTH_SHORT).show()
+                if (showingUpcoming) {
+                    val status = if (position == 0) "Confirmed" else "Pending"
+                    statusView.text = status
+                    statusView.setTextColor(
+                        if (position == 0) android.graphics.Color.parseColor("#10B981")
+                        else android.graphics.Color.parseColor("#F59E0B")
+                    )
+                } else {
+                    statusView.text = "Completed"
+                    statusView.setTextColor(android.graphics.Color.parseColor("#6B7280"))
                 }
-                holder.itemView.findViewById<View>(R.id.btnCancel).setOnClickListener {
-                    Toast.makeText(holder.itemView.context, "Cancel Clicked", Toast.LENGTH_SHORT).show()
+
+                // Card click for details
+                holder.itemView.setOnClickListener {
+                    Toast.makeText(holder.itemView.context, "View booking details", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun getItemCount() = 3
+            override fun getItemCount() = if (showingUpcoming) 3 else 5
+        }
+    }
+
+    private fun updateTabs(binding: FragmentBookingListBinding) {
+        if (showingUpcoming) {
+            binding.tabUpcoming.setTextColor(resources.getColor(R.color.primary, null))
+            binding.tabUpcoming.setBackgroundResource(R.drawable.bg_tab_indicator_active)
+            binding.tabHistory.setTextColor(resources.getColor(R.color.text_secondary, null))
+            binding.tabHistory.background = null
+        } else {
+            binding.tabHistory.setTextColor(resources.getColor(R.color.primary, null))
+            binding.tabHistory.setBackgroundResource(R.drawable.bg_tab_indicator_active)
+            binding.tabUpcoming.setTextColor(resources.getColor(R.color.text_secondary, null))
+            binding.tabUpcoming.background = null
         }
     }
 }
