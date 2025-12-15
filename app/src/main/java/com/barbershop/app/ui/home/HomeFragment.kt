@@ -1,5 +1,7 @@
 package com.barbershop.app.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -28,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupRecyclerView()
         setupClickListeners()
+        setupMapSection()
         observeBarbers()
     }
 
@@ -63,6 +66,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private fun setupMapSection() {
+        // Map card click - open Google Maps with all barber locations
+        binding.mapCard.setOnClickListener {
+            openGoogleMapsWithBarbers()
+        }
+        
+        // Open Map button
+        binding.btnOpenMap.setOnClickListener {
+            openGoogleMapsWithBarbers()
+        }
+    }
+
+    private fun openGoogleMapsWithBarbers() {
+        // Default location (can be replaced with user's current location)
+        val centerLat = 40.7128
+        val centerLng = -74.0060
+        
+        // Open Google Maps centered on the area with barbers
+        val uri = Uri.parse("geo:$centerLat,$centerLng?q=barbershop")
+        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        
+        if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivity(mapIntent)
+        } else {
+            // Fallback to browser
+            val browserUri = Uri.parse("https://www.google.com/maps/search/barbershop/@$centerLat,$centerLng,14z")
+            startActivity(Intent(Intent.ACTION_VIEW, browserUri))
+        }
+    }
+
     private fun observeBarbers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.barbersState.collectLatest { state ->
@@ -73,6 +107,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     is Resource.Success -> {
                         val barbers = state.data ?: emptyList()
                         barberAdapter.submitList(barbers)
+                        // Update map barber count
+                        binding.tvMapBarberCount.text = "${barbers.size} barbers nearby"
                     }
                     is Resource.Error -> {
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()

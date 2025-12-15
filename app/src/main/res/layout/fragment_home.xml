@@ -81,6 +81,93 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Map Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mapCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeWidth="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Map Placeholder/WebView Container -->
+                    <ImageView
+                        android:id="@+id/ivMapPlaceholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_map_placeholder"
+                        android:background="@color/gray_light" />
+
+                    <!-- Map Overlay with markers info -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_gradient_bottom">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📍 Barbers Near You"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tvMapBarberCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3 barbers within 5 miles"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:alpha="0.9" />
+
+                    </LinearLayout>
+
+                    <!-- Tap to open full map -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOpenMap"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="12dp"
+                        android:text="Open Map"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_location"
+                        app:iconSize="14dp"
+                        app:cornerRadius="18dp"
+                        app:backgroundTint="@color/white"
+                        android:textColor="@color/primary"
+                        app:iconTint="@color/primary" />
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nearby Barbers"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="12dp" />
+
             <!-- Barber List in Card Container -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

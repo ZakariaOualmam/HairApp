@@ -49,20 +49,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         
-        binding.toolbar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.action_profile -> {
-                    showProfileMenu()
-                    true
-                }
-                else -> false
-            }
+        // Profile button click - show popup menu
+        binding.btnProfile.setOnClickListener {
+            showProfileMenu()
         }
     }
 
     private fun showProfileMenu() {
-        val profileMenuItem = binding.toolbar.findViewById<View>(R.id.action_profile)
-        val popupMenu = PopupMenu(this, profileMenuItem)
+        val popupMenu = PopupMenu(this, binding.btnProfile)
         popupMenu.menuInflater.inflate(R.menu.profile_popup_menu, popupMenu.menu)
         
         // Update the theme toggle text based on current mode
@@ -73,8 +67,9 @@ class MainActivity : AppCompatActivity() {
         
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.action_my_profile -> {
-                    navController.navigate(R.id.action_global_userProfileFragment)
+                R.id.action_settings -> {
+                    // Navigate to Edit Profile (Settings)
+                    navController.navigate(R.id.action_global_editProfileFragment)
                     true
                 }
                 R.id.action_toggle_theme -> {
@@ -122,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                     binding.appBarLayout.visibility = View.VISIBLE
                     binding.bottomNav.visibility = View.VISIBLE
                     binding.toolbar.navigationIcon = null
+                    binding.btnProfile.visibility = View.VISIBLE
                     
                     // Update toolbar title based on destination
                     binding.tvToolbarTitle.text = when (destination.id) {
@@ -136,12 +132,13 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNav.visibility = View.VISIBLE
                     // Show back button for sub-pages
                     binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+                    binding.btnProfile.visibility = View.GONE
                     
                     binding.tvToolbarTitle.text = when (destination.id) {
                         R.id.userProfileFragment -> "My Profile"
                         R.id.barberProfileFragment -> "Barber Details"
                         R.id.bookingFragment -> "Book Appointment"
-                        R.id.editProfileFragment -> "Edit Profile"
+                        R.id.editProfileFragment -> "Settings"
                         else -> getString(R.string.app_name)
                     }
                 }

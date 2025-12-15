@@ -10,6 +10,11 @@
         android:id="@+id/action_global_userProfileFragment"
         app:destination="@id/userProfileFragment" />
 
+    <!-- Global action to navigate to settings from anywhere -->
+    <action
+        android:id="@+id/action_global_editProfileFragment"
+        app:destination="@id/editProfileFragment" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.barbershop.app.ui.auth.LoginFragment"

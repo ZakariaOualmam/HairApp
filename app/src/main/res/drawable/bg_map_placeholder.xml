@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="200dp"
+    android:viewportWidth="400"
+    android:viewportHeight="200">
+    
+    <!-- Map background -->
+    <path
+        android:fillColor="#E8F4E8"
+        android:pathData="M0,0h400v200h-400z"/>
+    
+    <!-- Roads -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,100h400v8h-400z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M200,0v200h8v-200z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,0v200h6v-200z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M350,0v200h6v-200z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,50h400v6h-400z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,150h400v6h-400z"/>
+    
+    <!-- Buildings/blocks -->
+    <path
+        android:fillColor="#D4E4D4"
+        android:pathData="M70,20h60v60h-60z"/>
+    <path
+        android:fillColor="#D4E4D4"
+        android:pathData="M270,20h60v60h-60z"/>
+    <path
+        android:fillColor="#D4E4D4"
+        android:pathData="M70,120h60v60h-60z"/>
+    <path
+        android:fillColor="#D4E4D4"
+        android:pathData="M270,120h60v60h-60z"/>
+    
+    <!-- Map pin 1 -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M100,70 C100,55 88,45 88,35 C88,25 95,18 100,18 C105,18 112,25 112,35 C112,45 100,55 100,70z"/>
+    <circle
+        android:fillColor="#FFFFFF"
+        android:cx="100"
+        android:cy="35"
+        android:r="6"/>
+    
+    <!-- Map pin 2 -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M300,90 C300,75 288,65 288,55 C288,45 295,38 300,38 C305,38 312,45 312,55 C312,65 300,75 300,90z"/>
+    <circle
+        android:fillColor="#FFFFFF"
+        android:cx="300"
+        android:cy="55"
+        android:r="6"/>
+    
+    <!-- Map pin 3 -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M180,140 C180,125 168,115 168,105 C168,95 175,88 180,88 C185,88 192,95 192,105 C192,115 180,125 180,140z"/>
+    <circle
+        android:fillColor="#FFFFFF"
+        android:cx="180"
+        android:cy="105"
+        android:r="6"/>
+        
+</vector>
