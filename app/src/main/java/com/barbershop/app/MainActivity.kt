@@ -3,11 +3,11 @@ package com.barbershop.app
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.barbershop.app.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,18 +51,40 @@ class MainActivity : AppCompatActivity() {
         
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.action_toggle_theme -> {
-                    toggleTheme()
+                R.id.action_profile -> {
+                    showProfileMenu()
                     true
-                }
-                R.id.userProfileFragment -> {
-                    NavigationUI.onNavDestinationSelected(menuItem, navController)
                 }
                 else -> false
             }
         }
+    }
+
+    private fun showProfileMenu() {
+        val profileMenuItem = binding.toolbar.findViewById<View>(R.id.action_profile)
+        val popupMenu = PopupMenu(this, profileMenuItem)
+        popupMenu.menuInflater.inflate(R.menu.profile_popup_menu, popupMenu.menu)
         
-        updateThemeIcon()
+        // Update the theme toggle text based on current mode
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isDarkMode = prefs.getBoolean(KEY_IS_DARK_MODE, false)
+        popupMenu.menu.findItem(R.id.action_toggle_theme)?.title = 
+            if (isDarkMode) "☀️ Light Mode" else "🌙 Dark Mode"
+        
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_my_profile -> {
+                    navController.navigate(R.id.action_global_userProfileFragment)
+                    true
+                }
+                R.id.action_toggle_theme -> {
+                    toggleTheme()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 
     private fun toggleTheme() {
@@ -78,16 +100,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun updateThemeIcon() {
-        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val isDarkMode = prefs.getBoolean(KEY_IS_DARK_MODE, false)
-        
-        binding.toolbar.menu.findItem(R.id.action_toggle_theme)?.setIcon(
-            if (isDarkMode) R.drawable.ic_light_mode 
-            else R.drawable.ic_dark_mode
-        )
-    }
-
     private fun setupNavigation() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -95,7 +107,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        NavigationUI.setupWithNavController(binding.toolbar, navController)
+        // Handle back button in toolbar
+        binding.toolbar.setNavigationOnClickListener {
+            navController.navigateUp()
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -103,9 +118,10 @@ class MainActivity : AppCompatActivity() {
                     binding.appBarLayout.visibility = View.GONE
                     binding.bottomNav.visibility = View.GONE
                 }
-                else -> {
+                R.id.homeFragment, R.id.bookingListFragment, R.id.aiFeaturesFragment -> {
                     binding.appBarLayout.visibility = View.VISIBLE
                     binding.bottomNav.visibility = View.VISIBLE
+                    binding.toolbar.navigationIcon = null
                     
                     // Update toolbar title based on destination
                     binding.tvToolbarTitle.text = when (destination.id) {
@@ -115,7 +131,25 @@ class MainActivity : AppCompatActivity() {
                         else -> getString(R.string.app_name)
                     }
                 }
+                else -> {
+                    binding.appBarLayout.visibility = View.VISIBLE
+                    binding.bottomNav.visibility = View.VISIBLE
+                    // Show back button for sub-pages
+                    binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+                    
+                    binding.tvToolbarTitle.text = when (destination.id) {
+                        R.id.userProfileFragment -> "My Profile"
+                        R.id.barberProfileFragment -> "Barber Details"
+                        R.id.bookingFragment -> "Book Appointment"
+                        R.id.editProfileFragment -> "Edit Profile"
+                        else -> getString(R.string.app_name)
+                    }
+                }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

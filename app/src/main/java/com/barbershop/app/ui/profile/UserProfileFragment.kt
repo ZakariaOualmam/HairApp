@@ -24,7 +24,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun setupClickListeners() {
         binding.btnEditProfile.setOnClickListener {
-            Toast.makeText(context, "Edit Profile", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
         }
 
         binding.btnBookingHistory.setOnClickListener {

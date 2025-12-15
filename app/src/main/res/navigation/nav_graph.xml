@@ -5,6 +5,11 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <!-- Global action to navigate to profile from anywhere -->
+    <action
+        android:id="@+id/action_global_userProfileFragment"
+        app:destination="@id/userProfileFragment" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.barbershop.app.ui.auth.LoginFragment"
@@ -98,6 +103,9 @@
             android:id="@+id/action_userProfileFragment_to_bookingListFragment"
             app:destination="@id/bookingListFragment" />
         <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
             android:id="@+id/action_userProfileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav_graph"
@@ -109,6 +117,12 @@
         android:name="com.barbershop.app.ui.booking.BookingListFragment"
         android:label="My Bookings"
         tools:layout="@layout/fragment_booking_list" />
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.barbershop.app.ui.profile.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
 
     <fragment
         android:id="@+id/barberDashboardFragment"
