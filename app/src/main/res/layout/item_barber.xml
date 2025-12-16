@@ -114,6 +114,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="12dp"
             android:paddingTop="12dp"
+            android:paddingEnd="6dp"
             android:background="@drawable/border_top_divider">
 
             <ImageView
@@ -142,10 +143,11 @@
                 android:textSize="12sp"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
+                android:minWidth="0dp"
                 app:icon="@drawable/ic_location"
                 app:iconTint="@color/primary"
                 app:iconSize="14dp"
-                app:iconPadding="4dp"
+                app:iconPadding="2dp"
                 app:cornerRadius="16dp"
                 app:rippleColor="@color/primary_container" />
 
@@ -157,7 +159,8 @@
                 android:text="Book"
                 android:textSize="12sp"
                 android:textAllCaps="false"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="12dp"
+                android:minWidth="0dp"
                 app:cornerRadius="16dp"
                 app:backgroundTint="@color/primary"
                 android:textColor="@color/text_on_primary"
