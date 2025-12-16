@@ -16,31 +16,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Header with Return Button -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageButton
-                    android:id="@+id/btnReturnHome"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_back"
-                    android:contentDescription="Return to Home"
-                    android:tint="@color/purple_500"
-                    android:padding="8dp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="AI Studio"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:fontFamily="sans-serif-medium" />
-            </LinearLayout>
+            <!-- header removed to avoid duplicate title with activity toolbar -->
 
             <!-- Main Card Container -->
             <com.google.android.material.card.MaterialCardView
