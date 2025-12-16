@@ -189,6 +189,7 @@
                     android:nestedScrollingEnabled="false"
                     android:clipToPadding="false"
                     android:paddingVertical="8dp"
+                    android:paddingHorizontal="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_barber" />
 
