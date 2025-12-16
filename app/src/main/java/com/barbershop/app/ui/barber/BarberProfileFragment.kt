@@ -37,7 +37,7 @@ class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
     }
 
     private fun setupUI(barber: Barber) {
-        binding.tvProfileName.text = barber.shopName
+        binding.tvBarberTitle.text = barber.shopName
         binding.tvProfileAddress.text = barber.address
         
         Glide.with(this).load(barber.imageUrl).into(binding.ivBarberHeader)

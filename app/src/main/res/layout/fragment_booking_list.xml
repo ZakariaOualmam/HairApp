@@ -16,7 +16,18 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <!-- header removed to avoid duplicate title with activity toolbar -->
+            <!-- Return button kept (no title) so fragment binding still has an entrypoint -->
+            <ImageButton
+                android:id="@+id/btnReturnHome"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_back"
+                android:contentDescription="Return to Home"
+                android:tint="@color/purple_500"
+                android:padding="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
 
             <!-- Tab Layout -->
             <LinearLayout
