@@ -42,6 +42,15 @@
                     android:tint="@color/purple_500"
                     android:padding="8dp"
                     android:layout_marginEnd="8dp" />
+                <TextView
+                    android:id="@+id/tvBarberTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barber Details"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif-medium" />
             </LinearLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

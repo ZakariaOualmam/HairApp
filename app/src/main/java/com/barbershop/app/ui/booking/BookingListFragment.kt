@@ -32,10 +32,8 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentBookingListBinding.bind(view)
 
-        // Use activity/appbar title instead of an in-fragment title
-        requireActivity().title = "Bookings"
-
-        // Return button to Home
+        // Inline header title + return button
+        binding.tvTitle.text = "Bookings"
         binding.btnReturnHome.setOnClickListener {
             findNavController().navigate(R.id.action_global_homeFragment)
         }

@@ -37,10 +37,10 @@ class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
     }
 
     private fun setupUI(barber: Barber) {
-        requireActivity().title = barber.shopName
+        binding.tvBarberTitle.text = barber.shopName
         binding.tvProfileAddress.text = barber.address
 
-        // Return/up button
+        // Return/up button (inline header)
         binding.btnReturnHome.setOnClickListener {
             findNavController().navigateUp()
         }

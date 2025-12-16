@@ -5,6 +5,7 @@ package com.barbershop.app.ui.ai
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -17,8 +18,8 @@ class AIFeaturesFragment : Fragment(R.layout.fragment_ai_features) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set activity title and Return button to Home
-        requireActivity().title = "AI Studio"
+        // Inline header title + Return button
+        view.findViewById<TextView>(R.id.tvTitle)?.text = "AI Studio"
         view.findViewById<View>(R.id.btnReturnHome)?.setOnClickListener {
             findNavController().navigate(R.id.action_global_homeFragment)
         }
