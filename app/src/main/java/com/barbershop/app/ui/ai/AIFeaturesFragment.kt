@@ -17,7 +17,8 @@ class AIFeaturesFragment : Fragment(R.layout.fragment_ai_features) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Return button to Home
+        // Set activity title and Return button to Home
+        requireActivity().title = "AI Studio"
         view.findViewById<View>(R.id.btnReturnHome)?.setOnClickListener {
             findNavController().navigate(R.id.action_global_homeFragment)
         }

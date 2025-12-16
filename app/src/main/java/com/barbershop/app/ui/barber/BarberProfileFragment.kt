@@ -37,8 +37,13 @@ class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
     }
 
     private fun setupUI(barber: Barber) {
-        binding.tvBarberTitle.text = barber.shopName
+        requireActivity().title = barber.shopName
         binding.tvProfileAddress.text = barber.address
+
+        // Return/up button
+        binding.btnReturnHome.setOnClickListener {
+            findNavController().navigateUp()
+        }
         
         Glide.with(this).load(barber.imageUrl).into(binding.ivBarberHeader)
         
