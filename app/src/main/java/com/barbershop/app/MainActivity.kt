@@ -116,17 +116,23 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment, R.id.bookingListFragment, R.id.aiFeaturesFragment -> {
                     binding.appBarLayout.visibility = View.VISIBLE
                     binding.bottomNav.visibility = View.VISIBLE
-                    binding.toolbar.navigationIcon = null
 
-                    // For Home show profile button and app name; for Bookings/AI we hide the
-                    // profile icon and clear the activity toolbar title because those
-                    // fragments render their own inline header with a return button.
+                    // For home show profile button and app name.
+                    // For Bookings / AI Studio we want the activity toolbar to show
+                    // the screen title and a back button aligned like the activity
+                    // header — so we show the navigation icon and set the title.
                     if (destination.id == R.id.homeFragment) {
                         binding.btnProfile.visibility = View.VISIBLE
+                        binding.toolbar.navigationIcon = null
                         binding.tvToolbarTitle.text = getString(R.string.app_name)
-                    } else {
+                    } else if (destination.id == R.id.bookingListFragment) {
                         binding.btnProfile.visibility = View.GONE
-                        binding.tvToolbarTitle.text = ""
+                        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+                        binding.tvToolbarTitle.text = "Bookings"
+                    } else if (destination.id == R.id.aiFeaturesFragment) {
+                        binding.btnProfile.visibility = View.GONE
+                        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+                        binding.tvToolbarTitle.text = "AI Studio"
                     }
                 }
                 else -> {
@@ -136,12 +142,11 @@ class MainActivity : AppCompatActivity() {
                     binding.toolbar.setNavigationIcon(R.drawable.ic_back)
                     binding.btnProfile.visibility = View.GONE
 
-                    // For Barber Profile we let the fragment render its own header (with
-                    // return button/title), so clear the activity toolbar title and
-                    // disable the activity back icon to avoid duplication.
+                    // For Barber Profile show the activity toolbar back icon and title
+                    // (the fragment content will not duplicate the header anymore).
                     if (destination.id == R.id.barberProfileFragment) {
-                        binding.toolbar.navigationIcon = null
-                        binding.tvToolbarTitle.text = ""
+                        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+                        binding.tvToolbarTitle.text = "Barber Details"
                     } else {
                         binding.tvToolbarTitle.text = when (destination.id) {
                             R.id.userProfileFragment -> "My Profile"
