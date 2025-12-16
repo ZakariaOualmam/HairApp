@@ -117,29 +117,38 @@ class MainActivity : AppCompatActivity() {
                     binding.appBarLayout.visibility = View.VISIBLE
                     binding.bottomNav.visibility = View.VISIBLE
                     binding.toolbar.navigationIcon = null
-                    binding.btnProfile.visibility = View.VISIBLE
-                    
-                    // Update toolbar title based on destination
-                    binding.tvToolbarTitle.text = when (destination.id) {
-                        R.id.homeFragment -> getString(R.string.app_name)
-                        R.id.bookingListFragment -> "Bookings"
-                        R.id.aiFeaturesFragment -> "AI Studio"
-                        else -> getString(R.string.app_name)
+
+                    // For Home show profile button and app name; for Bookings/AI we hide the
+                    // profile icon and clear the activity toolbar title because those
+                    // fragments render their own inline header with a return button.
+                    if (destination.id == R.id.homeFragment) {
+                        binding.btnProfile.visibility = View.VISIBLE
+                        binding.tvToolbarTitle.text = getString(R.string.app_name)
+                    } else {
+                        binding.btnProfile.visibility = View.GONE
+                        binding.tvToolbarTitle.text = ""
                     }
                 }
                 else -> {
                     binding.appBarLayout.visibility = View.VISIBLE
                     binding.bottomNav.visibility = View.VISIBLE
-                    // Show back button for sub-pages
+                    // Default: show back button for sub-pages
                     binding.toolbar.setNavigationIcon(R.drawable.ic_back)
                     binding.btnProfile.visibility = View.GONE
-                    
-                    binding.tvToolbarTitle.text = when (destination.id) {
-                        R.id.userProfileFragment -> "My Profile"
-                        R.id.barberProfileFragment -> "Barber Details"
-                        R.id.bookingFragment -> "Book Appointment"
-                        R.id.editProfileFragment -> "Settings"
-                        else -> getString(R.string.app_name)
+
+                    // For Barber Profile we let the fragment render its own header (with
+                    // return button/title), so clear the activity toolbar title and
+                    // disable the activity back icon to avoid duplication.
+                    if (destination.id == R.id.barberProfileFragment) {
+                        binding.toolbar.navigationIcon = null
+                        binding.tvToolbarTitle.text = ""
+                    } else {
+                        binding.tvToolbarTitle.text = when (destination.id) {
+                            R.id.userProfileFragment -> "My Profile"
+                            R.id.bookingFragment -> "Book Appointment"
+                            R.id.editProfileFragment -> "Settings"
+                            else -> getString(R.string.app_name)
+                        }
                     }
                 }
             }
