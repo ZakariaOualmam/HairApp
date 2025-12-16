@@ -41,7 +41,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
         loadUserData()
         setupClickListeners()
-        setupToolbarBackButton()
     }
 
     private fun loadUserData() {
@@ -64,11 +63,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
-    private fun setupToolbarBackButton() {
-        requireActivity().findViewById<androidx.appcompat.widget.Toolbar?>(R.id.toolbar)?.setNavigationOnClickListener {
-            findNavController().navigateUp()
-        }
-    }
+    
 
     private fun saveChanges() {
         val fullName = binding.etFullName.text.toString().trim()

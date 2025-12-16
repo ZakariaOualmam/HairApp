@@ -22,7 +22,7 @@
             android:background="@android:color/transparent"
             app:title=""
             app:titleTextColor="@color/text_primary"
-            app:navigationIconTint="@color/text_primary">
+            app:navigationIconTint="@color/purple_500">
 
             <!-- Custom Title -->
             <TextView

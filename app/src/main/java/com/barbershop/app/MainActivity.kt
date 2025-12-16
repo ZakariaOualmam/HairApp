@@ -102,10 +102,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        // Handle back button in toolbar
-        binding.toolbar.setNavigationOnClickListener {
-            navController.navigateUp()
-        }
+        // Handle back button in toolbar. For Bookings/AI (bottom-nav screens) treat
+        // the navigation as a 'go to Home' action; otherwise perform normal navigateUp().
+            // We'll set toolbar navigation behavior per-destination below so fragments
+            // can't override a global handler and leave it in an inconsistent state.
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -125,14 +125,21 @@ class MainActivity : AppCompatActivity() {
                         binding.btnProfile.visibility = View.VISIBLE
                         binding.toolbar.navigationIcon = null
                         binding.tvToolbarTitle.text = getString(R.string.app_name)
+                        binding.toolbar.setNavigationOnClickListener(null)
                     } else if (destination.id == R.id.bookingListFragment) {
                         binding.btnProfile.visibility = View.GONE
                         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
                         binding.tvToolbarTitle.text = "Bookings"
+                        binding.toolbar.setNavigationOnClickListener {
+                            navController.navigate(R.id.action_global_homeFragment)
+                        }
                     } else if (destination.id == R.id.aiFeaturesFragment) {
                         binding.btnProfile.visibility = View.GONE
                         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
                         binding.tvToolbarTitle.text = "AI Studio"
+                        binding.toolbar.setNavigationOnClickListener {
+                            navController.navigate(R.id.action_global_homeFragment)
+                        }
                     }
                 }
                 else -> {
@@ -147,7 +154,13 @@ class MainActivity : AppCompatActivity() {
                     if (destination.id == R.id.barberProfileFragment) {
                         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
                         binding.tvToolbarTitle.text = "Barber Details"
+                        binding.toolbar.setNavigationOnClickListener {
+                            navController.navigateUp()
+                        }
                     } else {
+                        binding.toolbar.setNavigationOnClickListener {
+                            navController.navigateUp()
+                        }
                         binding.tvToolbarTitle.text = when (destination.id) {
                             R.id.userProfileFragment -> "My Profile"
                             R.id.bookingFragment -> "Book Appointment"
