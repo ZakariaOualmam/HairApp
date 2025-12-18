@@ -1,11 +1,14 @@
 package com.barbershop.app
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
@@ -67,20 +70,30 @@ class MainActivity : AppCompatActivity() {
         profilePopup?.dismiss()
 
         val popupView = LayoutInflater.from(this).inflate(
-            R.layout.popup_profile_menu,
+            R.layout.fullscreen_profile_menu,
             null,
             false
         )
 
         profilePopup = PopupWindow(
             popupView,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT,
             true
         ).apply {
-            elevation = 16f
+            elevation = 24f
             isOutsideTouchable = true
-            setBackgroundDrawable(null)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+
+        // Dismiss when clicking on the grey overlay background
+        popupView.findViewById<FrameLayout>(R.id.rootLayout)?.setOnClickListener {
+            profilePopup?.dismiss()
+        }
+
+        // Prevent clicks on menu card from dismissing
+        popupView.findViewById<View>(R.id.menuCard)?.setOnClickListener { 
+            // Do nothing - prevent click propagation
         }
 
         // Set up click listeners for menu items
@@ -120,25 +133,12 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Support feature coming soon", Toast.LENGTH_SHORT).show()
         }
 
-        // Calculate position - show below and aligned to the right of profile button
-        val location = IntArray(2)
-        binding.btnProfile.getLocationOnScreen(location)
-        
-        // Measure popup to get its width
-        popupView.measure(
-            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-        )
-        
-        val popupWidth = popupView.measuredWidth
-        val xOffset = location[0] + binding.btnProfile.width - popupWidth
-        val yOffset = location[1] + binding.btnProfile.height + 8
-
+        // Show fullscreen popup from top
         profilePopup?.showAtLocation(
             binding.root,
-            Gravity.NO_GRAVITY,
-            xOffset,
-            yOffset
+            Gravity.TOP or Gravity.CENTER_HORIZONTAL,
+            0,
+            0
         )
     }
 
