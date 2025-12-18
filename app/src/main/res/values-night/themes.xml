@@ -106,4 +106,15 @@
     <style name="TextAppearance.HairApp.Body" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textColor">@color/text_secondary</item>
     </style>
+
+    <!-- Bottom Sheet Dialog Style -->
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

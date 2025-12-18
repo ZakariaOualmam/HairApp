@@ -2,14 +2,18 @@ package com.barbershop.app
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.PopupMenu
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.barbershop.app.databinding.ActivityMainBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,50 +53,59 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         
-        // Profile button click - show popup menu
+        // Profile button click - show bottom sheet menu
         binding.btnProfile.setOnClickListener {
-            showProfileMenu()
+            showProfileBottomSheet()
         }
     }
 
-    private fun showProfileMenu() {
-        val popupMenu = PopupMenu(this, binding.btnProfile)
-        popupMenu.menuInflater.inflate(R.menu.profile_popup_menu, popupMenu.menu)
-        
-        // Update the theme toggle text based on current mode
-        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val isDarkMode = prefs.getBoolean(KEY_IS_DARK_MODE, false)
-        popupMenu.menu.findItem(R.id.action_toggle_theme)?.title = 
-            if (isDarkMode) "☀️ Light Mode" else "🌙 Dark Mode"
-        
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_settings -> {
-                    // Navigate to Edit Profile (Settings)
-                    navController.navigate(R.id.action_global_editProfileFragment)
-                    true
-                }
-                R.id.action_toggle_theme -> {
-                    toggleTheme()
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-
-    private fun toggleTheme() {
-        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val isDarkMode = prefs.getBoolean(KEY_IS_DARK_MODE, false)
-        val newMode = !isDarkMode
-        
-        prefs.edit().putBoolean(KEY_IS_DARK_MODE, newMode).apply()
-        
-        AppCompatDelegate.setDefaultNightMode(
-            if (newMode) AppCompatDelegate.MODE_NIGHT_YES 
-            else AppCompatDelegate.MODE_NIGHT_NO
+    private fun showProfileBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val bottomSheetView = LayoutInflater.from(this).inflate(
+            R.layout.bottom_sheet_profile_menu,
+            findViewById(android.R.id.content),
+            false
         )
+
+        // Set up click listeners for menu items
+        bottomSheetView.findViewById<LinearLayout>(R.id.profileHeaderSection)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            navController.navigate(R.id.action_global_userProfileFragment)
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuCity)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            Toast.makeText(this, "City feature coming soon", Toast.LENGTH_SHORT).show()
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuRequestHistory)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            navController.navigate(R.id.action_global_bookingListFragment)
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuWallet)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            Toast.makeText(this, "Wallet feature coming soon", Toast.LENGTH_SHORT).show()
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuServices)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            // Navigate to home to show services
+            navController.navigate(R.id.action_global_homeFragment)
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuSettings)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            navController.navigate(R.id.action_global_settingsFragment)
+        }
+
+        bottomSheetView.findViewById<LinearLayout>(R.id.menuSupport)?.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            Toast.makeText(this, "Support feature coming soon", Toast.LENGTH_SHORT).show()
+        }
+
+        bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.show()
     }
 
     private fun setupNavigation() {
@@ -164,7 +177,8 @@ class MainActivity : AppCompatActivity() {
                         binding.tvToolbarTitle.text = when (destination.id) {
                             R.id.userProfileFragment -> "My Profile"
                             R.id.bookingFragment -> "Book Appointment"
-                            R.id.editProfileFragment -> "Settings"
+                            R.id.editProfileFragment -> "Edit Profile"
+                            R.id.settingsFragment -> "Settings"
                             else -> getString(R.string.app_name)
                         }
                     }
