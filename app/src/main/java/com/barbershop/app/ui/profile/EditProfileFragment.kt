@@ -70,9 +70,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         val email = binding.etEmail.text.toString().trim()
         val phone = binding.etPhone.text.toString().trim()
         val location = binding.etLocation.text.toString().trim()
-        val currentPassword = binding.etCurrentPassword.text.toString()
-        val newPassword = binding.etNewPassword.text.toString()
-        val confirmPassword = binding.etConfirmPassword.text.toString()
 
         // Validation
         if (fullName.isEmpty()) {
@@ -88,22 +85,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         if (phone.isEmpty()) {
             binding.etPhone.error = "Phone is required"
             return
-        }
-
-        // Password change validation
-        if (newPassword.isNotEmpty()) {
-            if (currentPassword.isEmpty()) {
-                binding.etCurrentPassword.error = "Current password required"
-                return
-            }
-            if (newPassword.length < 6) {
-                binding.etNewPassword.error = "Password must be at least 6 characters"
-                return
-            }
-            if (newPassword != confirmPassword) {
-                binding.etConfirmPassword.error = "Passwords don't match"
-                return
-            }
         }
 
         // Save to SharedPreferences or API

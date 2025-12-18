@@ -32,6 +32,10 @@ class BookingListFragment : Fragment(R.layout.fragment_booking_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentBookingListBinding.bind(view)
 
+        // Check if we should show History tab by default
+        val showHistory = arguments?.getBoolean("showHistory", false) ?: false
+        showingUpcoming = !showHistory
+
         // Title and navigation handled by activity toolbar
 
         // Initial state

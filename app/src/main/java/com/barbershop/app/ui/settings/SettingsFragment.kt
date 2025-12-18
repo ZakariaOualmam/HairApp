@@ -65,8 +65,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
 
         binding.btnChangePassword.setOnClickListener {
-            // Navigate to edit profile which has password section
-            findNavController().navigate(R.id.action_settingsFragment_to_editProfileFragment)
+            // Navigate to security/change password page
+            findNavController().navigate(R.id.action_settingsFragment_to_securityFragment)
         }
 
         binding.btnLogout.setOnClickListener {

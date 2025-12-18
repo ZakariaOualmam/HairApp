@@ -137,7 +137,12 @@
         android:id="@+id/bookingListFragment"
         android:name="com.barbershop.app.ui.booking.BookingListFragment"
         android:label="My Bookings"
-        tools:layout="@layout/fragment_booking_list" />
+        tools:layout="@layout/fragment_booking_list">
+        <argument
+            android:name="showHistory"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 
     <fragment
         android:id="@+id/editProfileFragment"
@@ -154,11 +159,20 @@
             android:id="@+id/action_settingsFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
         <action
+            android:id="@+id/action_settingsFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+        <action
             android:id="@+id/action_settingsFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.barbershop.app.ui.settings.SecurityFragment"
+        android:label="Security"
+        tools:layout="@layout/fragment_security" />
 
     <fragment
         android:id="@+id/barberDashboardFragment"
