@@ -97,6 +97,11 @@ class MainActivity : AppCompatActivity() {
             // Do nothing - prevent click propagation
         }
 
+        // Close button click
+        popupView.findViewById<View>(R.id.btnCloseMenu)?.setOnClickListener {
+            profilePopup?.dismiss()
+        }
+
         // Set up click listeners for menu items
         popupView.findViewById<LinearLayout>(R.id.profileHeaderSection)?.setOnClickListener {
             profilePopup?.dismiss()

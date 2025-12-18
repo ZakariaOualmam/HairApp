@@ -1,121 +1,213 @@
 package com.barbershop.app.ui.barber
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.barbershop.app.R
 import com.barbershop.app.databinding.FragmentBarberProfileBinding
 import com.barbershop.app.domain.model.Barber
-import com.barbershop.app.domain.model.Service
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
 
     private lateinit var binding: FragmentBarberProfileBinding
-    private lateinit var serviceAdapter: ServiceAdapter
-    private var selectedService: Service? = null
-    private var selectedPaymentMethod: String = "cash" // Default to cash
     private var currentBarber: Barber? = null
+    private var selectedServiceName: String? = null
+    private var selectedServicePrice: Double = 0.0
+    private var selectedServiceTime: String = ""
+    private var isServicesExpanded = false
+    private var isBarberDetailsExpanded = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBarberProfileBinding.bind(view)
 
-        // Argument parsing manually for now since we don't have safe-args plugin configured fully in this script flow
-        // In real app, we would use args.barberId
         val barber = arguments?.getParcelable<Barber>("barber")
         
         if (barber != null) {
             currentBarber = barber
             setupUI(barber)
-            setupPaymentMethods()
+            setupServiceSelection()
+            setupBarberProfile(barber)
             setupActionButtons(barber)
+            checkLocationPermission()
         } else {
             Toast.makeText(context, "Error loading barber", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun setupUI(barber: Barber) {
-        // Use activity toolbar for title and navigation
-        requireActivity().title = barber.shopName
+        requireActivity().title = "Barber Details"
         
-        // Set barber info
+        // Set barber info in profile card
         binding.tvBarberName.text = barber.shopName
         binding.tvBarberRating.text = String.format("%.1f", barber.rating)
-        binding.tvStatusMessage.text = "${barber.shopName} accepted your request"
+        binding.tvDistance.text = "1.8 km"
         
-        // Load barber avatar image
+        // Set large barber info
+        binding.tvBarberNameLarge.text = barber.shopName
+        binding.tvBarberRatingLarge.text = "${String.format("%.1f", barber.rating)} (120 reviews)"
+        binding.tvBarberId.text = "ID: BRB${barber.id.take(6).uppercase()}"
+        binding.tvBarberLocation.text = barber.address
+        binding.tvDistanceLarge.text = "1.8 km"
+        
+        // Load barber avatar
         Glide.with(this)
             .load(barber.imageUrl)
             .placeholder(R.drawable.ic_profile)
             .into(binding.ivBarberAvatar)
         
-        // Set default distance/time/price info (would be calculated from location in real app)
-        binding.tvDistance.text = "1.8 Km"
-        binding.tvTime.text = "18 Min"
-        binding.tvPrice.text = "$${barber.services.firstOrNull()?.price?.toInt() ?: 25}"
-        
-        // Generate a barber ID badge
-        binding.tvBarberId.text = "BRB${barber.id.take(6).uppercase()}"
-        
-        // Setup services list
-        serviceAdapter = ServiceAdapter { service ->
-            selectedService = service
-            // Update price when service selected
-            binding.tvPrice.text = "$${service.price.toInt()}"
-        }
-        
-        binding.rvServices.apply {
-            adapter = serviceAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-        
-        serviceAdapter.submitList(barber.services)
+        Glide.with(this)
+            .load(barber.imageUrl)
+            .placeholder(R.drawable.ic_profile)
+            .into(binding.ivBarberAvatarLarge)
     }
 
-    private fun setupPaymentMethods() {
-        // Cash payment card click
-        binding.cardCashPayment.setOnClickListener {
-            selectedPaymentMethod = "cash"
-            binding.rbCash.isChecked = true
-            binding.rbOnline.isChecked = false
+    private fun setupServiceSelection() {
+        // Header click to expand/collapse services
+        binding.offerHaircutHeader.setOnClickListener {
+            toggleServicesSection()
         }
         
-        // Online payment card click
-        binding.cardOnlinePayment.setOnClickListener {
-            selectedPaymentMethod = "online"
-            binding.rbCash.isChecked = false
-            binding.rbOnline.isChecked = true
+        binding.cardOfferHaircut.setOnClickListener {
+            toggleServicesSection()
         }
         
-        // Radio buttons
-        binding.rbCash.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                selectedPaymentMethod = "cash"
-                binding.rbOnline.isChecked = false
-            }
+        // Service selection clicks
+        binding.cardServiceHaircut.setOnClickListener {
+            selectService("Haircut", 25.0, "~30 min")
+            binding.rbHaircut.isChecked = true
+            binding.rbBeardTrim.isChecked = false
+            binding.rbFullShave.isChecked = false
         }
         
-        binding.rbOnline.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                selectedPaymentMethod = "online"
-                binding.rbCash.isChecked = false
-            }
+        binding.cardServiceBeardTrim.setOnClickListener {
+            selectService("Beard Trim", 15.0, "~15 min")
+            binding.rbHaircut.isChecked = false
+            binding.rbBeardTrim.isChecked = true
+            binding.rbFullShave.isChecked = false
         }
+        
+        binding.cardServiceFullShave.setOnClickListener {
+            selectService("Full Shave", 20.0, "~20 min")
+            binding.rbHaircut.isChecked = false
+            binding.rbBeardTrim.isChecked = false
+            binding.rbFullShave.isChecked = true
+        }
+        
+        // Radio button clicks
+        binding.rbHaircut.setOnClickListener {
+            selectService("Haircut", 25.0, "~30 min")
+            binding.rbBeardTrim.isChecked = false
+            binding.rbFullShave.isChecked = false
+        }
+        
+        binding.rbBeardTrim.setOnClickListener {
+            selectService("Beard Trim", 15.0, "~15 min")
+            binding.rbHaircut.isChecked = false
+            binding.rbFullShave.isChecked = false
+        }
+        
+        binding.rbFullShave.setOnClickListener {
+            selectService("Full Shave", 20.0, "~20 min")
+            binding.rbHaircut.isChecked = false
+            binding.rbBeardTrim.isChecked = false
+        }
+    }
+    
+    private fun toggleServicesSection() {
+        isServicesExpanded = !isServicesExpanded
+        
+        if (isServicesExpanded) {
+            binding.servicesExpandableSection.visibility = View.VISIBLE
+            binding.ivExpandArrow.rotation = 180f
+        } else {
+            binding.servicesExpandableSection.visibility = View.GONE
+            binding.ivExpandArrow.rotation = 0f
+        }
+    }
+    
+    private fun selectService(name: String, price: Double, time: String) {
+        selectedServiceName = name
+        selectedServicePrice = price
+        selectedServiceTime = time
+        
+        // Show selected service badge
+        binding.tvSelectedService.text = "$name - $${price.toInt()}"
+        binding.tvSelectedService.visibility = View.VISIBLE
+        
+        // Collapse services section
+        isServicesExpanded = false
+        binding.servicesExpandableSection.visibility = View.GONE
+        binding.ivExpandArrow.rotation = 0f
+        
+        // Show barber profile card and change button to "Profile"
+        binding.cardBarberProfile.visibility = View.VISIBLE
+        binding.btnMainAction.text = "View Profile"
+        
+        // Hide barber details expanded section when selecting new service
+        binding.barberDetailsExpanded.visibility = View.GONE
+        isBarberDetailsExpanded = false
+    }
+
+    private fun setupBarberProfile(barber: Barber) {
+        // Barber profile card click - show expanded details
+        binding.cardBarberProfile.setOnClickListener {
+            showBarberDetails()
+        }
+        
+        // Pick Service button - go back to service selection
+        binding.btnPickService.setOnClickListener {
+            hideBarberDetails()
+            toggleServicesSection()
+        }
+    }
+    
+    private fun showBarberDetails() {
+        isBarberDetailsExpanded = true
+        binding.cardBarberProfile.visibility = View.GONE
+        binding.barberDetailsExpanded.visibility = View.VISIBLE
+        
+        // Show action buttons (Call & Messages)
+        binding.barberActionButtons.visibility = View.VISIBLE
+        
+        // Hide bottom main action button when showing barber details
+        binding.bottomButtonContainer.visibility = View.GONE
+    }
+    
+    private fun hideBarberDetails() {
+        isBarberDetailsExpanded = false
+        binding.barberDetailsExpanded.visibility = View.GONE
+        binding.cardBarberProfile.visibility = if (selectedServiceName != null) View.VISIBLE else View.GONE
+        
+        // Show bottom button again
+        binding.bottomButtonContainer.visibility = View.VISIBLE
     }
 
     private fun setupActionButtons(barber: Barber) {
-        // Barber (Call) button
+        // Main action button
+        binding.btnMainAction.setOnClickListener {
+            if (selectedServiceName != null) {
+                // Service is selected - show barber profile details
+                showBarberDetails()
+            } else {
+                // No service selected - prompt to select one
+                Toast.makeText(context, "Please select a service first", Toast.LENGTH_SHORT).show()
+                toggleServicesSection()
+            }
+        }
+        
+        // Call button
         binding.btnCallBarber.setOnClickListener {
-            // In a real app, this would get the barber's phone number from profile
             val phoneNumber = "tel:+1234567890"
             try {
                 val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -127,11 +219,41 @@ class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
             }
         }
         
-        // Messages button - navigate to chat/messaging
+        // Messages button
         binding.btnMessages.setOnClickListener {
-            // Navigate to a chat screen (would be implemented in full app)
             Toast.makeText(context, "Opening messages with ${barber.shopName}", Toast.LENGTH_SHORT).show()
-            // In a real app: findNavController().navigate(R.id.action_barberProfileFragment_to_chatFragment, bundle)
+        }
+        
+        // Location warning click - go to settings
+        binding.cardLocationWarning.setOnClickListener {
+            openLocationSettings()
+        }
+    }
+    
+    private fun checkLocationPermission() {
+        val hasLocationPermission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        
+        if (!hasLocationPermission) {
+            binding.cardLocationWarning.visibility = View.VISIBLE
+            binding.ivUserPin.visibility = View.GONE
+        } else {
+            binding.cardLocationWarning.visibility = View.GONE
+            binding.ivUserPin.visibility = View.VISIBLE
+        }
+    }
+    
+    private fun openLocationSettings() {
+        try {
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+        } catch (e: Exception) {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.fromParts("package", requireContext().packageName, null)
+            }
+            startActivity(intent)
         }
     }
 }

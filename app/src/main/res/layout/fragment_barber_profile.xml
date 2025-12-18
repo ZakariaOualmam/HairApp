@@ -7,11 +7,11 @@
     android:background="@color/background_soft"
     tools:context=".ui.barber.BarberProfileFragment">
 
-    <!-- Map Section at Top -->
+    <!-- Map Section at Top - Full screen height for map -->
     <FrameLayout
         android:id="@+id/mapContainer"
         android:layout_width="match_parent"
-        android:layout_height="280dp">
+        android:layout_height="match_parent">
 
         <!-- Map Placeholder/Image -->
         <ImageView
@@ -21,56 +21,423 @@
             android:scaleType="centerCrop"
             android:background="@drawable/bg_map_placeholder"/>
 
-        <!-- Map Pin Marker -->
+        <!-- Barber Pin Marker (Red) -->
         <ImageView
+            android:id="@+id/ivBarberPin"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
             android:src="@drawable/ic_map_pin_crimson"/>
+
+        <!-- User Location Pin (Blue) -->
+        <ImageView
+            android:id="@+id/ivUserPin"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="80dp"
+            android:src="@drawable/ic_user_location"/>
+
+        <!-- Location Not Enabled Warning -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLocationWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="100dp"
+            android:visibility="gone"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/error_light">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/error"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enable location in settings"
+                    android:textSize="13sp"
+                    android:textColor="@color/error"
+                    android:layout_marginStart="8dp"/>
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="@color/error"
+                    android:layout_marginStart="8dp"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </FrameLayout>
 
     <!-- Bottom Sheet Content -->
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/bottomSheetContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
         android:background="@drawable/bg_bottom_sheet"
-        android:clipToPadding="false">
+        android:elevation="16dp">
 
-        <LinearLayout
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_drag_handle"/>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:maxHeight="500dp">
 
-            <!-- Barber Info Card -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeWidth="0dp">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <LinearLayout
+                <!-- Section: Offer Your Haircut (Expandable) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardOfferHaircut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/divider"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <!-- Barber Header Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Header Row - Always Visible -->
+                        <LinearLayout
+                            android:id="@+id/offerHaircutHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_scissors"
+                                app:tint="@color/primary"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Offer your haircut"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"
+                                android:layout_marginStart="12dp"/>
+
+                            <TextView
+                                android:id="@+id/tvSelectedService"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="13sp"
+                                android:textColor="@color/primary"
+                                android:visibility="gone"/>
+
+                            <ImageView
+                                android:id="@+id/ivExpandArrow"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_chevron_down"
+                                app:tint="@color/text_secondary"
+                                android:layout_marginStart="8dp"/>
+
+                        </LinearLayout>
+
+                        <!-- Services Section - Expandable -->
+                        <LinearLayout
+                            android:id="@+id/servicesExpandableSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:paddingHorizontal="16dp"
+                            android:paddingBottom="16dp">
+
+                            <!-- Divider -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/divider"
+                                android:layout_marginBottom="12dp"/>
+
+                            <!-- Haircut Option -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cardServiceHaircut"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/surface_variant"
+                                app:strokeWidth="0dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:padding="14dp">
+
+                                    <RadioButton
+                                        android:id="@+id/rbHaircut"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/primary"/>
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/ic_scissors"
+                                        app:tint="@color/primary"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_icon_circle"
+                                        android:padding="6dp"/>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:layout_marginStart="12dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Haircut"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_primary"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="~30 min"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/text_secondary"/>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$25"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"/>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Beard Trim Option -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cardServiceBeardTrim"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/surface_variant"
+                                app:strokeWidth="0dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:padding="14dp">
+
+                                    <RadioButton
+                                        android:id="@+id/rbBeardTrim"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/primary"/>
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/ic_beard"
+                                        app:tint="@color/accent_orange"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_icon_circle_orange"
+                                        android:padding="6dp"/>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:layout_marginStart="12dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Beard Trim"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_primary"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="~15 min"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/text_secondary"/>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$15"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"/>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Full Shave Option -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cardServiceFullShave"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/surface_variant"
+                                app:strokeWidth="0dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:padding="14dp">
+
+                                    <RadioButton
+                                        android:id="@+id/rbFullShave"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/primary"/>
+
+                                    <ImageView
+                                        android:layout_width="32dp"
+                                        android:layout_height="32dp"
+                                        android:src="@drawable/ic_razor"
+                                        app:tint="@color/accent_teal"
+                                        android:layout_marginStart="8dp"
+                                        android:background="@drawable/bg_icon_circle_teal"
+                                        android:padding="6dp"/>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:layout_marginStart="12dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Full Shave"
+                                            android:textSize="15sp"
+                                            android:textStyle="bold"
+                                            android:textColor="@color/text_primary"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="~20 min"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/text_secondary"/>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$20"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/primary"/>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Barber Profile Section (Shows when service selected) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBarberProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:strokeWidth="0dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
 
                         <!-- Barber Avatar -->
                         <com.google.android.material.card.MaterialCardView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            app:cardCornerRadius="30dp"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            app:cardCornerRadius="28dp"
                             app:cardElevation="2dp"
                             app:strokeWidth="0dp">
 
@@ -94,12 +461,22 @@
                             android:orientation="vertical"
                             android:layout_marginStart="12dp">
 
+                            <TextView
+                                android:id="@+id/tvBarberName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Khalid Al Mansoori"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_primary"/>
+
                             <!-- Rating Row -->
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:gravity="center_vertical">
+                                android:gravity="center_vertical"
+                                android:layout_marginTop="4dp">
 
                                 <ImageView
                                     android:layout_width="14dp"
@@ -113,340 +490,274 @@
                                     android:layout_height="wrap_content"
                                     android:text="4.8"
                                     android:textSize="13sp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/text_primary"
+                                    android:textColor="@color/text_secondary"
                                     android:layout_marginStart="4dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" · "
+                                    android:textColor="@color/text_secondary"/>
+
+                                <TextView
+                                    android:id="@+id/tvDistance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1.8 km"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/text_secondary"/>
 
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tvBarberName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Khalid Al Mansoori"
-                                android:textSize="16sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/text_primary"
-                                android:layout_marginTop="2dp"/>
-
                         </LinearLayout>
 
-                        <!-- Barber ID Badge -->
-                        <TextView
-                            android:id="@+id/tvBarberId"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="DHHMA628997"
-                            android:textSize="11sp"
-                            android:textColor="@color/text_secondary"
-                            android:background="@color/surface_variant"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp"/>
+                        <!-- Chevron -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/text_secondary"/>
 
                     </LinearLayout>
 
-                    <!-- Status Message -->
-                    <TextView
-                        android:id="@+id/tvStatusMessage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Khalid Al Mansoori accepted your request"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="12dp"/>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Distance/Time Info Row -->
-                    <LinearLayout
+                <!-- Barber Details Expanded (Shows when barber profile clicked) -->
+                <LinearLayout
+                    android:id="@+id/barberDetailsExpanded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Barber Full Info Card -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="16dp">
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:strokeWidth="0dp">
 
-                        <!-- Distance -->
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:src="@drawable/ic_location"
-                                app:tint="@color/text_secondary"/>
-
-                            <TextView
-                                android:id="@+id/tvDistance"
-                                android:layout_width="wrap_content"
+                            <!-- Barber Header Row -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="1.8 Km"
-                                android:textSize="13sp"
-                                android:textColor="@color/text_secondary"
-                                android:layout_marginStart="4dp"/>
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <!-- Barber Avatar Large -->
+                                <com.google.android.material.card.MaterialCardView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    app:cardCornerRadius="35dp"
+                                    app:cardElevation="2dp"
+                                    app:strokeWidth="0dp">
+
+                                    <ImageView
+                                        android:id="@+id/ivBarberAvatarLarge"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_profile"
+                                        android:scaleType="centerCrop"
+                                        android:background="@color/primary_container"
+                                        android:padding="14dp"
+                                        app:tint="@color/primary"/>
+
+                                </com.google.android.material.card.MaterialCardView>
+
+                                <!-- Barber Info -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="14dp">
+
+                                    <TextView
+                                        android:id="@+id/tvBarberNameLarge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Khalid Al Mansoori"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/text_primary"/>
+
+                                    <!-- Rating Row -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginTop="4dp">
+
+                                        <ImageView
+                                            android:layout_width="16dp"
+                                            android:layout_height="16dp"
+                                            android:src="@drawable/ic_star_filled"
+                                            app:tint="@color/star_gold"/>
+
+                                        <TextView
+                                            android:id="@+id/tvBarberRatingLarge"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="4.8 (120 reviews)"
+                                            android:textSize="14sp"
+                                            android:textColor="@color/text_secondary"
+                                            android:layout_marginStart="4dp"/>
+
+                                    </LinearLayout>
+
+                                    <!-- Barber ID -->
+                                    <TextView
+                                        android:id="@+id/tvBarberId"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="ID: BRB123456"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/text_hint"
+                                        android:layout_marginTop="2dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Location Info -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginTop="16dp"
+                                android:padding="12dp"
+                                android:background="@drawable/bg_rounded_surface">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="@color/primary"/>
+
+                                <TextView
+                                    android:id="@+id/tvBarberLocation"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Downtown Barbershop, 123 Main St"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_primary"
+                                    android:layout_marginStart="10dp"/>
+
+                                <TextView
+                                    android:id="@+id/tvDistanceLarge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1.8 km"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/text_secondary"/>
+
+                            </LinearLayout>
+
+                            <!-- Action Buttons: Call & Messages -->
+                            <LinearLayout
+                                android:id="@+id/barberActionButtons"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_marginTop="16dp">
+
+                                <!-- Barber Call Button -->
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnCallBarber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:layout_weight="1"
+                                    android:text="Call"
+                                    android:textSize="14sp"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    app:icon="@drawable/ic_phone_call"
+                                    app:iconGravity="textStart"
+                                    app:iconTint="@color/white"
+                                    app:cornerRadius="12dp"
+                                    app:backgroundTint="@color/success"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <!-- Messages Button -->
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnMessages"
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:layout_weight="1"
+                                    android:text="Messages"
+                                    android:textSize="14sp"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/primary"
+                                    app:icon="@drawable/ic_message"
+                                    app:iconGravity="textStart"
+                                    app:iconTint="@color/primary"
+                                    app:cornerRadius="12dp"
+                                    app:backgroundTint="@color/primary_container"
+                                    android:layout_marginStart="8dp"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                        <!-- Time -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="24dp">
+                    </com.google.android.material.card.MaterialCardView>
 
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:src="@drawable/ic_distance"
-                                app:tint="@color/text_secondary"/>
-
-                            <TextView
-                                android:id="@+id/tvTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="18 Min"
-                                android:textSize="13sp"
-                                android:textColor="@color/text_secondary"
-                                android:layout_marginStart="4dp"/>
-
-                        </LinearLayout>
-
-                        <!-- Price -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="24dp">
-
-                            <TextView
-                                android:id="@+id/tvPrice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="$1000"
-                                android:textSize="13sp"
-                                android:textColor="@color/text_secondary"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
+                    <!-- Pick Service Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPickService"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Pick Service"
+                        android:textSize="16sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        app:icon="@drawable/ic_scissors"
+                        app:iconGravity="textStart"
+                        app:iconTint="@color/white"
+                        app:cornerRadius="14dp"
+                        app:backgroundTint="@color/primary"/>
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-            <!-- Payment Methods Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Payment methods"
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Bottom Action Button -->
+        <LinearLayout
+            android:id="@+id/bottomButtonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/surface">
+
+            <!-- Find Barber / View Profile Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMainAction"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Find a barber"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="24dp"/>
-
-            <!-- Cash Payment Option -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardCashPayment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeWidth="0dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <RadioButton
-                        android:id="@+id/rbCash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:buttonTint="@color/primary"/>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_cash"
-                        app:tint="@color/success"
-                        android:layout_marginStart="8dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cash payment"
-                        android:textSize="15sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginStart="12dp"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Online Payment Option -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardOnlinePayment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeWidth="0dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <RadioButton
-                        android:id="@+id/rbOnline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/primary"/>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_credit_card"
-                        app:tint="@color/primary"
-                        android:layout_marginStart="8dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Online payment"
-                        android:textSize="15sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginStart="12dp"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Offer Your Fare Section -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/divider">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Offer your fare"
-                        android:textSize="15sp"
-                        android:textColor="@color/text_secondary"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@android:drawable/ic_menu_edit"
-                        app:tint="@color/text_secondary"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Services Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Services"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="24dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvServices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_service"/>
-
-            <!-- Bottom spacing for action buttons -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="14dp"
+                app:backgroundTint="@color/success"/>
 
         </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <!-- Bottom Action Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="16dp"
-        android:background="@color/surface"
-        android:elevation="8dp">
-
-        <!-- Barber Button (Call) -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCallBarber"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_weight="1"
-            android:text="Barber"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:icon="@drawable/ic_phone_call"
-            app:iconGravity="textStart"
-            app:iconTint="@color/white"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/success"
-            android:layout_marginEnd="8dp"/>
-
-        <!-- Messages Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMessages"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_weight="1"
-            android:text="Messages"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:textColor="@color/text_primary"
-            app:icon="@drawable/ic_message"
-            app:iconGravity="textStart"
-            app:iconTint="@color/text_primary"
-            app:cornerRadius="12dp"
-            app:backgroundTint="@color/surface_variant"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/divider"
-            android:layout_marginStart="8dp"/>
 
     </LinearLayout>
 
