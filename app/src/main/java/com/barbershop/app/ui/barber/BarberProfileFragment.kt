@@ -244,12 +244,3 @@ class BarberProfileFragment : Fragment(R.layout.fragment_barber_profile) {
         }
     }
 }
-            startActivity(intent)
-        } catch (e: Exception) {
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                data = Uri.fromParts("package", requireContext().packageName, null)
-            }
-            startActivity(intent)
-        }
-    }
-}
